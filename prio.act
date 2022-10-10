@@ -40,10 +40,10 @@ template <pint N> defproc prio (chan? (int<8>) xIn; chan ? (int<1>) command; cha
 	// for the command input, 0 will be insert, 1 will be remove
 	*[command = 0 -> xIn?x
 	[] command = 1 -> newXvalue:=xOut; 
-		*[cycleIteration = N -> minValue:=newXvalue; cycleIteration:= cycleIteration - 1
-		[](cycleIteration > 0) & (newXvalue < minValue) -> minValue:= newXvalue; cycleIteration := cycleIteration - 1
-		[](cycleIteration > 0) & (newXvalue > minValue) -> skip; cycleIteration := cycleIteration - 1
-		[](cycleIteration > 0) & (newXvalue = minValue) -> skip; cycleIteration := cycleIteration - 1
+		*[cycleIteration = N -> minValue:=newXvalue; newXvalue := xOut; cycleIteration:= cycleIteration - 1
+		[](cycleIteration > 0) & (newXvalue < minValue) -> minValue:= newXvalue; newXvalue:= xOut; cycleIteration := cycleIteration - 1
+		[](cycleIteration > 0) & (newXvalue > minValue) -> skip; newXvalue := xOut; cycleIteration := cycleIteration - 1
+		[](cycleIteration > 0) & (newXvalue = minValue) -> skip; newXvalue := xOut; cycleIteration := cycleIteration - 1
 		]
 		xOut!minValue
 	]	
