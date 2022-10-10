@@ -1,0 +1,51 @@
+defproc oneplace (chan?(int<8>) l; chan!(int<8>) r)
+{
+  int<8> x;
+  chp {
+    *[ l?x; r!x ]
+  }
+}
+
+//defproc storageOneplace (chan? (int<8> l; chan! (int<8>) r)
+//{
+//	int<8> x;
+//	chp
+//	{
+//		*[l?x]
+//	}
+//}
+
+// defproc beginOneplace (chan? (int<8> l; chan? (int<8>) xIn; chan! (int <8>) r)
+
+template <pint N> defproc prio (chan? (int<8>) xIn; chan ? (int<1>) command; chan! (int<8>) xOut)
+{
+	storageOneplace stor;
+
+
+  { N >= 1 : "Buffer should have at least one element!" }; // assertion
+  oneplace buf[N];
+  (i:N-1: buf[i].r=buf[i+1].l;)
+  buf[0].l=xIn;
+  buf[N-1].r=xOut;
+  
+ // oneplace minValueStorage;
+ // minValueStorage.l
+  
+  int<8> x;
+  int<8> cycleIteration:=N;
+  int<8> newXvalue;
+  int<8> minValue;
+  chp
+  {
+	// for the command input, 0 will be insert, 1 will be remove
+	*[command = 0 -> xIn?x
+	[] command = 1 -> newXvalue:=xOut; 
+		*[cycleIteration = N -> minValue:=newXvalue; cycleIteration:= cycleIteration - 1
+		[](cycleIteration > 0) & (newXvalue < minValue) -> minValue:= newXvalue; cycleIteration := cycleIteration - 1
+		[](cycleIteration > 0) & (newXvalue > minValue) -> skip; cycleIteration := cycleIteration - 1
+		[](cycleIteration > 0) & (newXvalue = minValue) -> skip; cycleIteration := cycleIteration - 1
+		]
+		xOut!minValue
+	]	
+  }
+}
