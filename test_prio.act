@@ -1,0 +1,55 @@
+import "prio.act";
+
+defproc source (chan!(int<8>) data; chan! (int<1>) command)
+{
+  int<8> number;
+  int<1> com;
+  int<8> loopVarCom;
+  chp 
+  {
+	//*[loopVarNum < 4 -> data!number; number := number + 1 ];
+	//com := 0;
+	//command!com;
+	number := 5;
+	data!number;
+	
+	//com := 0;
+	//command!com;
+	number := 2;
+	data!number;
+	
+	//com := 0;
+	//command!com;
+	number := 10;
+	data!number;
+	
+	//com := 0;
+	//command!com;
+	number := 1;
+	data!number;
+	
+	//loopVarCom := 0;
+	//com := 0;
+	//*[loopVarCom < 4 -> command!com; loopVarCom := loopVarCom + 1];
+	com := 1;
+	*[loopVarCom < 4 -> command!com; loopVarCom := loopVarCom + 1]
+  }
+}
+
+defproc sink (chan?(int<8>) data)
+{
+  int<8> usedNumber;
+  //int<1> usedCom;
+  chp {
+    *[ data?usedNumber; log ("Received value: ", usedNumber)	
+	//[] command?usedCom; log ("Received command: ", usedCom)
+	]
+  }
+}
+
+defproc test()
+{
+   source src;
+   sink snk;
+   prio<4> p(src.data, src.command, snk.data);
+}
