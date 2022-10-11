@@ -1,0 +1,34 @@
+defproc inv (bool? in; bool! out)
+{
+   prs {
+     in -> out-
+   ~in -> out+
+   }
+}
+
+defproc nor2 (bool? inA; bool? inB; bool! out)
+{
+	prs 
+	{
+		(inA | inB) -> out-
+		(~inA & ~inB) -> out+
+	}
+}
+
+defproc nand2 (bool? inA; bool? inB; bool! out)
+{
+	prs 
+	{
+		(inA & inB) -> out-
+		(~inA | ~inB) -> out+
+	}
+}
+
+defproc celem2 (bool? inA; bool? inB; bool! out)
+{
+	prs
+	{
+		inA & inB -> out-
+		~inA & ~inB -> out+
+	}
+}

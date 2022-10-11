@@ -1,0 +1,10 @@
+ana i/in i/out
+h Vdd!
+l GND!
+stepsize 10
+s
+h i/in
+s
+l i/in
+s
+h i/in

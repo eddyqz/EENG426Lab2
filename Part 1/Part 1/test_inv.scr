@@ -1,0 +1,9 @@
+watch in
+watch out
+status X
+
+set in 0
+cycle
+
+set in 1
+cycle

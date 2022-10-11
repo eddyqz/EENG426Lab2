@@ -1,0 +1,18 @@
+ana nand2instance/inA nand2instance/inB nand2instance/out
+vector in nand2instance/inA nand2instance/inB
+stepsize 10
+
+h Vdd!
+l GND!
+
+setvector in 00
+s
+
+setvector in 01
+s
+
+setvector in 10
+s
+
+setvector in 11
+s

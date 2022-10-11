@@ -1,0 +1,28 @@
+ana celem2/inA celem2/inB celem2/out
+vector in celem2/inA celem2/inB
+stepsize 10
+
+h Vdd!
+l GND!
+
+setvector in 00
+s
+
+setvector in 01
+s
+
+setvector in 10
+s
+
+setvector in 11
+s
+
+setvector in 10
+s
+
+setvector in 01
+s
+
+setvector in 00
+s
+

@@ -1,0 +1,18 @@
+ana nor2/inA nor2/inB nor2/out
+vector in nor2/inA nor2/inB
+stepsize 10
+
+h Vdd!
+l GND!
+
+setvector in 00
+s
+
+setvector in 01
+s
+
+setvector in 10
+s
+
+setvector in 11
+s

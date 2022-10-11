@@ -1,0 +1,20 @@
+watch inA
+watch inB
+watch out
+status X
+
+set inA 0
+set inB 0
+cycle
+
+set inA 0
+set inB 1
+cycle
+
+set inA 1
+set inB 0
+cycle
+
+set inA 1
+set inB 1
+cycle
